@@ -10,6 +10,15 @@
         <p>
             Cette ligne a été écrite entièrement en HTML.<br />
             <?php
+                $isEnabled = true;
+                if ($isEnabled == true) {
+                    echo "Accès autorisé !";
+                }
+                else {
+                    echo "Accès refusé !";
+                }
+            ?>
+            <?php
                 $mickael = ['Mickaël Andrieu', 'mickael.andrieu@exemple.com', 'S3cr3t', 34];
                 $mathieu = ['Mathieu Nebra', 'mathieu.nebra@exemple.com', 'devine', 33];
                 $laurene = ['Laurène Castor', 'laurene.castor@exemple.com', 'P4ssw0rD', 28];
