@@ -1,37 +1,45 @@
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Notre première instruction : echo</title>
         <meta charset="utf-8" />
+        <title>Mon site de recettes</title>
     </head>
+ 
     <body>
-        <h2>Affichage de texte avec PHP</h2>
-        <p>
-            Cette ligne a été écrite entièrement en HTML.<br />
-            <?php
-                $isEnabled = true;
-                if ($isEnabled == true) {
-                    echo "Accès autorisé !";
-                }
-                else {
-                    echo "Accès refusé !";
-                }
-            ?>
-            <?php
-                $mickael = ['Mickaël Andrieu', 'mickael.andrieu@exemple.com', 'S3cr3t', 34];
-                $mathieu = ['Mathieu Nebra', 'mathieu.nebra@exemple.com', 'devine', 33];
-                $laurene = ['Laurène Castor', 'laurene.castor@exemple.com', 'P4ssw0rD', 28];
-                $users = [$mickael, $mathieu, $laurene];
-                echo $users[1][1] . " "; // "mathieu.nebra@exemple.com"
-
-                echo "<br>";
-
-                for ($line = 0; $line <= 2; $line++)
-                {
-                    echo $users[$line][0] . '<br />';
-                }
-            ?>
-        </p>
+ 
+    <!-- L'en-tête -->
+    
+    <header>
+        <!-- Le menu -->
+    
+        <nav id="menu">        
+            <div class="element_menu">
+                <h3>Titre menu</h3>
+                <ul>
+                    <li><a href="page1.html">Lien</a></li>
+                    <li><a href="page2.html">Lien</a></li>
+                    <li><a href="page3.html">Lien</a></li>
+                </ul>
+            </div>    
+        </nav>
+       
+    </header>
+    
+    <!-- Le corps -->
+    
+    <div id="corps">
+        <h1>Mon site de recettes</h1>
+                
+            <p>
+                Bienvenue sur mon site de recettes !
+            </p>
+        </div>
+    
+    <!-- Le pied de page -->
+    
+    <footer id="pied_de_page">
+        <p>Copyright moi, tous droits réservés</p>
+    </footer>
+    
     </body>
 </html>
