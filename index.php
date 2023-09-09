@@ -1,34 +1,30 @@
+<?php
+
+include('variables.php');
+
+include('functions.php');
+?>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Mon site de recettes</title>
-    </head>
- 
-    <body>
- 
-    <!-- L'en-tête -->
-    
-    <header>
-        <!-- Le menu -->
-    
-        <?php include('header.php'); ?>
-       
-    </header>
-    
-    <!-- Le corps -->
-    
-    <div id="corps">
-        <h1>Mon site de recettes</h1>
-                
-            <p>
-                Bienvenue sur mon site de recettes !
-            </p>
-        </div>
-    
-    <!-- Le pied de page -->
-    
-    <?php include('footer.php')?>
-    
-    </body>
+
+<head>
+    <title>Site de recettes - Page d'accueil</title>
+    <link rel="stylesheet" href="styleSheet.css">
+</head>
+
+<body>
+
+    <?php include('header.php');?>
+
+    <h1>Site de recettes</h1>
+    <?php foreach (getRecipes($recipes) as $recipe) {
+        echo "<h2>" . $recipe['title'] . "</h2>";
+        echo "<em>" . displayAuthor($recipe['author'], $users) . "</em>" . '<br>';
+    }?>
+    <br>
+
+    <?php include('footer.php');?>
+</body>
+
 </html>
