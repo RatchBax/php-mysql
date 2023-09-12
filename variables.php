@@ -1,5 +1,6 @@
 <?php
-// Déclaration du tableau des utilisateur
+// variables.php
+
 $users = [
     [
         'full_name' => 'Mickaël Andrieu',
@@ -18,23 +19,22 @@ $users = [
     ],
 ];
 
-// Déclaration du tableau des recettes
 $recipes = [
     [
         'title' => 'Cassoulet',
-        'recipe' => 'Etape 1 : Préparer le piège à cassoulet volant',
+        'recipe' => '',
         'author' => 'mickael.andrieu@exemple.com',
         'is_enabled' => true,
     ],
     [
         'title' => 'Couscous',
-        'recipe' => 'Etape 1 : Aller acheter du Couscous.',
+        'recipe' => '',
         'author' => 'mickael.andrieu@exemple.com',
         'is_enabled' => false,
     ],
     [
         'title' => 'Escalope milanaise',
-        'recipe' => 'Etape 1 : Aller acheter les ingrédients',
+        'recipe' => '',
         'author' => 'mathieu.nebra@exemple.com',
         'is_enabled' => true,
     ],
@@ -45,4 +45,3 @@ $recipes = [
         'is_enabled' => false,
     ],
 ];
-?>
