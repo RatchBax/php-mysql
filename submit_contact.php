@@ -11,9 +11,8 @@
 </head>
 
 <body>
-    <?php if (!isset($_GET['email']) || !isset($_GET['message'])) {
-        echo "<h1> Erreur dans le formulaire.</h1>
-        <p>Vous n'avez pas renseigné tout les champs du formulaire.</p>";
+    <?php if ((!isset($_GET['email']) || !filter_var($_GET['email'], FILTER_VALIDATE_EMAIL)) || (!isset($_GET['message']) || empty($_GET['message']))) {
+        echo ('<h1> Il faut un email et un message valides pour soumettre le formulaire. </h1>');
         return;
     } ?>
 
