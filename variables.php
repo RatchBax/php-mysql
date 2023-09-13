@@ -6,7 +6,7 @@ $users = [
         'full_name' => 'Mickaël Andrieu',
         'email' => 'mickael.andrieu@exemple.com',
         'age' => 34,
-        'password' => 'Mickaël'
+        'password' => 'Mickael'
     ],
     [
         'full_name' => 'Mathieu Nebra',
@@ -18,7 +18,7 @@ $users = [
         'full_name' => 'Laurène Castor',
         'email' => 'laurene.castor@exemple.com',
         'age' => 28,
-        'password' => 'Laurène'
+        'password' => 'Laurene'
     ],
 ];
 
