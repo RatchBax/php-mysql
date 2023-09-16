@@ -30,6 +30,22 @@
             <p class="card-text">
                 <b>Message</b> : <?php echo strip_tags($_POST['message']); ?>
             </p>
+
+            <p class="card-text">
+                <?php
+                if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0) {
+                    if ($_FILES['screenshot']['size'] <= 1000000) {
+                        $fileInfo = pathinfo($_FILES['screenshot']['name']);
+                        $extention = $fileInfo['extension'];
+                        $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
+                        if (in_array($extention, $allowedExtensions)) {
+                            move_uploaded_file($_FILES['screenshot']['tmp_name'], 'uploads/' . basename($_FILES['screenshot']['name']));
+                            echo "<b>Capture d'écran</b> : L'envoi a bien été effectué !";
+                        }
+                    }
+                }
+                ?>
+            </p>
         </div>
     </div>
 
