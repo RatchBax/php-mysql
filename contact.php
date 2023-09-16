@@ -1,3 +1,10 @@
+<!--
+    PARTIE Donnez la possibilité d'envoyer des fichiers
+
+    Cette partie a été réalisé dans les précédents commit.
+    Je n'avais pas vu qu'elle était déjà dans le code quand j'ai commit.
+-->
+
 <!-- contact.php -->
 <!DOCTYPE html>
 <html>
