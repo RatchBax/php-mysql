@@ -4,11 +4,20 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     foreach ($users as $user) {
         if ($user['email'] ==  $_POST['email'] && $user['password'] == $_POST['password']) {
             $loggedUser = ['email' => $user['email'],];
+
+            //Cookie que expire dans un ans
+            setcookie('LOGGED_USER', $loggedUser['email'], time() + 365*24*3600, "","", true, true);
+
         } else {
             $errorMessage = sprintf('Les informations envoyées ne permettent pas de
         vous identifier : (%s/%s)', $_POST['email'], $_POST['password']);
         }
     }
+}
+
+//Si le cookie est présent
+if (isset($_COOKIE['LOGGED_USER'])) {
+    $loggedUser = ['email' => $_COOKIE['LOGGED_USER'], ];
 }
 ?>
 
