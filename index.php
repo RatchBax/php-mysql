@@ -26,6 +26,7 @@
     <?php include_once('mysql.php'); ?>
     <!-- Si tout va bien, on peut continuer -->
     <?php
+    
     // On récupère tout le contenu de la table recipes
         $sqlQuery = 'SELECT * FROM recipes';
         $recipesStatement = $db->prepare($sqlQuery);
