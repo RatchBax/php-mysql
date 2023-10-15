@@ -20,5 +20,5 @@
 
 require('templates/post.php');
 require('src/model.php');
-require('templates/homepage.php');
 $posts = getPosts();
+require('templates/homepage.php');
