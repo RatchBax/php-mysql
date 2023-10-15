@@ -1,24 +1,12 @@
-<?php
-    $post = [
-        'title' => 'Un faux titre.',
-        'french_creation_date' => '03/03/2022 à 12h14min42s',
-        'content' => "Le faux contenu de mon billet.\nC'est fantastique !",
-    ];
+<!--
+    NOTE POUR LA CORRECTION
 
-    $comments = [
-        [
-            'author' => 'Un premier faux auteur',
-            'french_creation_date' => '03/03/2022 à 12h15min42s',
-            'comment' => 'Un faux commentaire.\n Le premier.',
-        ],
-        [
-            'author' => 'Un second faux auteur',
-            'french_creation_date' => '03/03/2022 à 12h16min42s',
-            'comment' => 'Un faux commentaire.\n Le second.',
-        ],
-    ];
+    Ce commit contient encore des modifications pour la partie d'avant car je n'avais pas comprit qu'il fallait refaire
+    un autre fichier "post.php" à la racine du dossier de travail.
+-->
 
-require('templates/post.php');
+<?php    
+require('post.php');
 require('src/model.php');
 $posts = getPosts();
 require('templates/homepage.php');
