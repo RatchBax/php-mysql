@@ -20,10 +20,8 @@
                 </h3>
                 <p>
                     <?= nl2br(htmlspecialchars($post['content'])); ?>
-                    <br>
-                    <em>
-                        <a href="post.php?id=<?= urlencode($post['identifier']) ?> ">Commentaires</a>
-                    </em>
+                    <br />
+                    <em><a href="post.php?id=<?= urlencode($post['identifier']) ?>">Commentaires</a></em>
                 </p>
             </div>
         <?php
