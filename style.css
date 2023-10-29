@@ -25,3 +25,14 @@ a
     text-decoration: none;
     color: blue;
 }
+
+.error th {
+    background-color: orange;
+    font-size: 20px;
+    padding:1%;
+}
+
+.error td {
+    background-color: #ffea00;
+    padding:1%;
+}
