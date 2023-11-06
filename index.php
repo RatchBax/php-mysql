@@ -1,4 +1,5 @@
 <?php
+
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/homepage.php');
 require_once('src/controllers/post.php');
@@ -8,6 +9,7 @@ try {
         if ($_GET['action'] === 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
+
                 post($identifier);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -15,6 +17,7 @@ try {
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
+
                 addComment($identifier, $_POST);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -25,7 +28,8 @@ try {
     } else {
         homepage();
     }
-} catch (Exception $e) { // S'il y a eu une erreur, alors...
+} catch (Exception $e) {
     $errorMessage = $e->getMessage();
+
     require('templates/error.php');
 }

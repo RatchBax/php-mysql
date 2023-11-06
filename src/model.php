@@ -32,14 +32,15 @@ function getPost($identifier) {
         'title' => $row['title'],
         'french_creation_date' => $row['french_creation_date'],
         'content' => $row['content'],
-        'identifier' => $row['id']
+        'identifier' => $row['id'],
     ];
 
     return $post;
 }
 
-
-function dbConnect() {
+function dbConnect()
+{
     $database = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
+
     return $database;
 }
