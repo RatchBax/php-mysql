@@ -1,4 +1,11 @@
 <?php
+class Post
+{
+    public string $id;
+    public string $title;
+    public string $content;
+    public string $french_creation_date;
+}
 
 function getPosts() {
     $database = dbConnect();
@@ -7,13 +14,11 @@ function getPosts() {
     );
     $posts = [];
     while (($row = $statement->fetch())) {
-        $post = [
-            'title' => $row['title'],
-            'french_creation_date' => $row['french_creation_date'],
-            'content' => $row['content'],
-            'identifier' => $row['id'],
-        ];
-
+        $post = new Post();
+        $post->title = $row['title'];
+        $post->french_creation_date = $row['french_creation_date'];
+        $post->content = $row['content'];
+        $post->id = $row['id'];
         $posts[] = $post;
     }
 
