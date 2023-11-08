@@ -1,9 +1,13 @@
 <?php
+use Application\Model\Comment\CommentRepository;
+use Application\Lib\Database\DatabaseConnection;
 
 require_once('src/model/comment.php');
 
 function addComment(string $post, array $input)
 {
+    $comments = new CommentRepository();
+    $comments->connection = new DatabaseConnection();
     $author = null;
     $comment = null;
     if (!empty($input['author']) && !empty($input['comment'])) {
@@ -13,7 +17,7 @@ function addComment(string $post, array $input)
         throw new Exception('Les données du formulaire sont invalides.');
     }
 
-    $success = createComment($post, $author, $comment);
+    $success = $comments->createComment($post, $author, $comment);
     if (!$success) {
         throw new Exception('Impossible d\'ajouter le commentaire !');
     } else {
