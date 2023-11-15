@@ -13,6 +13,12 @@ class Player {
         $this->level = $level;
         return $this;
     }
+
+    /////////
+
+    public function __construct(int $level) {
+        $this->level = $level;
+    }
 }
 
 class Encounter {
@@ -39,11 +45,8 @@ class Encounter {
 
 
 
-$greg = new Player();
-$greg->setLevel(400);
-
-$jade = new Player();
-$jade->setLevel(800);
+$greg = new Player(400);
+$jade = new Player(800);
 
 $encouter = new Encounter();
 
