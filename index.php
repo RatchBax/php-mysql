@@ -11,6 +11,20 @@
 
 declare(strict_types=1);
 
+abstract class AbstractPlayer {
+    protected string $name;
+    protected float $ratio;
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getRatio(): float
+    {
+        return $this->ratio;
+    }
+}   
 
 class Lobby
 {
@@ -42,32 +56,22 @@ class Lobby
     }
 }
 
-class Player
+class Player extends AbstractPlayer
 {
-    public function __construct(protected string $name, protected float $ratio = 400.0)
-    {
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    public function __construct(protected string $name, protected float $ratio = 400.0) { }
 
     private function probabilityAgainst(self $player): float
     {
         return 1 / (1 + (10 ** (($player->getRatio() - $this->getRatio()) / 400)));
     }
 
-    public function updateRatioAgainst(self $player, int $result): void
+    final protected function updateRatioAgainst(self $player, int $result): void
     {
         $this->ratio += 32 * ($result - $this->probabilityAgainst($player));
     }
-
-    public function getRatio(): float
-    {
-        return $this->ratio;
-    }
 }
+
+
 
 class QueuingPlayer extends Player {
     protected int $range;
