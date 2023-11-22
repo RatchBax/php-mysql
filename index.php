@@ -1,68 +1,95 @@
 <?php
 
+/*
+ * This file is part of the OpenClassRoom PHP Object Course.
+ *
+ * (c) Grégoire Hébert <contact@gheb.dev>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
 
 
-class Player {
-    private int $level;
+class Lobby
+{
+    /** @var array<QueuingPlayer> */
+    public array $queuingPlayers = [];
 
-    public function getLevel() : int {
-        return $this->level;
-    }
-
-    public function setLevel(int $level) : Player {
-        $this->level = $level;
-        return $this;
-    }
-
-    /////////
-
-    public function __construct(int $level) {
-        $this->level = $level;
-    }
-}
-
-class Encounter {
-    public const RESULT_WINNER = 1;
-    public const RESULT_LOSER = -1;
-    public const RESULT_DRAW = 0;
-    public const RESULT_POSSIBILITIES = [self::RESULT_WINNER, self::RESULT_LOSER, self::RESULT_DRAW];
-
-    public static function probabilityAgainst(int $levelPlayerOne, int $againstLevelPlayerTwo)
+    public function findOponents(QueuingPlayer $player): array
     {
-        return 1/(1+(10 ** (($againstLevelPlayerTwo - $levelPlayerOne)/400)));
+        $minLevel = round($player->getRatio() / 100);
+        $maxLevel = $minLevel + $player->getRange();
+
+        return array_filter($this->queuingPlayers, static function (QueuingPlayer $potentialOponent) use ($minLevel, $maxLevel, $player) {
+            $playerLevel = round($potentialOponent->getRatio() / 100);
+
+            return $player !== $potentialOponent && ($minLevel <= $playerLevel) && ($playerLevel <= $maxLevel);
+        });
     }
 
-    public static function setNewLevel(Player $PlayerOne, Player $againstPlayerTwo, int $playerOneResult)
+    public function addPlayer(Player $player): void
     {
-        if (!in_array($playerOneResult, self::RESULT_POSSIBILITIES)) {
-            trigger_error(sprintf('Invalid result. Expected %s',implode(' or ', self::RESULT_POSSIBILITIES)));
+        $this->queuingPlayers[] = new QueuingPlayer($player);
+    }
+
+    public function addPlayers(Player ...$players): void
+    {
+        foreach ($players as $player) {
+            $this->addPlayer($player);
         }
-
-        $PlayerOne->setLevel($PlayerOne->getLevel() + (int) (32 * ($playerOneResult - self::probabilityAgainst($PlayerOne->getLevel(), $againstPlayerTwo->getLevel()))));
     }
 }
 
+class Player
+{
+    public function __construct(protected string $name, protected float $ratio = 400.0)
+    {
+    }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
+    private function probabilityAgainst(self $player): float
+    {
+        return 1 / (1 + (10 ** (($player->getRatio() - $this->getRatio()) / 400)));
+    }
 
-$greg = new Player(400);
-$jade = new Player(800);
+    public function updateRatioAgainst(self $player, int $result): void
+    {
+        $this->ratio += 32 * ($result - $this->probabilityAgainst($player));
+    }
 
-$encouter = new Encounter();
+    public function getRatio(): float
+    {
+        return $this->ratio;
+    }
+}
 
-echo sprintf(
-    'Greg à %.2f%% chance de gagner face a Jade',
-    $encouter->probabilityAgainst($greg->getLevel(), $jade->getLevel())*100
-).PHP_EOL;
+class QueuingPlayer extends Player {
+    protected int $range;
 
-// Imaginons que greg l'emporte tout de même.
-$encouter->setNewLevel($greg, $jade, $encouter::RESULT_WINNER);
-$encouter->setNewLevel($jade, $greg, $encouter::RESULT_LOSER);
+    public function __construct(Player $player)
+    {
+        parent::__construct($player->name, $player->ratio);
+        $this->range = 1;
+        var_dump($this);
+    }
 
-echo sprintf(
-    'les niveaux des joueurs ont évolués vers %s pour Greg et %s pour Jade',
-    $greg->getLevel(),
-    $jade->getLevel()
-);
+    public function getRange() {
+        return $this->range;
+    }
+}
+
+$greg = new Player('greg', 400);
+$jade = new Player('jade', 476);
+
+$lobby = new Lobby();
+$lobby->addPlayers($greg, $jade);
+
+var_dump($lobby->findOponents($lobby->queuingPlayers[0]));
 
 exit(0);
