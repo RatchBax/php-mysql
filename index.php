@@ -65,7 +65,7 @@ class Player extends AbstractPlayer
         return 1 / (1 + (10 ** (($player->getRatio() - $this->getRatio()) / 400)));
     }
 
-    final protected function updateRatioAgainst(self $player, int $result): void
+    protected function updateRatioAgainst(self $player, int $result): void
     {
         $this->ratio += 32 * ($result - $this->probabilityAgainst($player));
     }
@@ -88,12 +88,28 @@ class QueuingPlayer extends Player {
     }
 }
 
-$greg = new Player('greg', 400);
-$jade = new Player('jade', 476);
+class BlitzPlayer extends Player {
+    public function  __construct($name) 
+    {
+        parent::__construct($name, 1200);
+    }
+
+    public function updateRatioAgainst(Player $player, int $result) : void {
+        parent::updateRatioAgainst($player, $result * 4);
+    }
+}
+
+$greg = new BlitzPlayer('greg');
+$jade = new BlitzPlayer('jade');
+$Jean = new BlitzPlayer('Jean');
+$Michel = new BlitzPlayer('Michel');
 
 $lobby = new Lobby();
-$lobby->addPlayers($greg, $jade);
+
+$lobby->addPlayers($greg, $jade, $Jean, $Michel);
+
+$Jean->updateRatioAgainst($Michel, 5);
 
 var_dump($lobby->findOponents($lobby->queuingPlayers[0]));
-
+var_dump($Jean);
 exit(0);
