@@ -4,10 +4,11 @@ namespace App\MatchMaker\Player {
 
     use App\MatchMaker\Interfaces\PlayerInterface;
     use App\MatchMaker\Interfaces\QueuingPlayerInterface;
-    class QueuingPlayer extends Player implements QueuingPlayerInterface {
+    class QueuingPlayer implements QueuingPlayerInterface {
+        private PlayerInterface $player;
         public function __construct(PlayerInterface $player, protected int $range = 1)
         {
-            parent::__construct($player->getName(), $player->getRatio());
+            $this->player = $player;
         }
 
         public function getRange(): int
@@ -21,11 +22,11 @@ namespace App\MatchMaker\Player {
         }
 
         public function getName() : string {
-            return $this->getName();
+            return $this->player->getName();
         }
 
         public function getRatio() : float {
-            return $this->ratio;
+            return $this->player->getRatio();
         }
     }
 }

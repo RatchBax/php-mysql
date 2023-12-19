@@ -19,11 +19,13 @@ spl_autoload_register(static function($fqcn) {
 use App\MatchMaker\Player\Player;
 use App\MatchMaker\Lobby\Lobby;
 
-$greg = new Player('greg');
-$jade = new Player('jade');
+$greg = new Player('Greg');
+$jade = new Player('Jade');
 $lobby = new Lobby();
 
 $lobby->addPlayers($greg, $jade);
+var_dump($lobby->queuingPlayers);
+echo "Finding opponents for Greg...";
 var_dump($lobby->findOponents($lobby->queuingPlayers[0]));
 
 exit(0);
