@@ -1,8 +1,11 @@
 <?php
 
 namespace App\MatchMaker\Player {
-    class QueuingPlayer extends Player {
-        public function __construct(AbstractPlayer $player, protected int $range = 1)
+
+    use App\MatchMaker\Interfaces\PlayerInterface;
+    use App\MatchMaker\Interfaces\QueuingPlayerInterface;
+    class QueuingPlayer extends Player implements QueuingPlayerInterface {
+        public function __construct(PlayerInterface $player, protected int $range = 1)
         {
             parent::__construct($player->getName(), $player->getRatio());
         }
@@ -15,6 +18,14 @@ namespace App\MatchMaker\Player {
         public function upgradeRange(): void
         {
             $this->range = min($this->range + 1, 40);
+        }
+
+        public function getName() : string {
+            return $this->getName();
+        }
+
+        public function getRatio() : float {
+            return $this->ratio;
         }
     }
 }
