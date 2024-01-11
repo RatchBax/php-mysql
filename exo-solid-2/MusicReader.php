@@ -4,14 +4,12 @@
 //require_once 'Mp3.php';
 //require_once 'Ogg.php';
 
-class MusicReader {
-    private MusicType $file;
+abstract class MusicReader {
+    protected $file;
 
-    public function __construct(MusicType $file) {
+    public function __construct($file) {
         $this->file = $file;
     }
 
-    public function listen() {
-        $this->file->listen($this->file->filename);
-    }
+    abstract public function listen() ;
 }
